@@ -304,6 +304,67 @@ Nhiệm vụ:
 
 
 /* -------------------LOGIN-------------- */
+
+/* #login{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    width:100%;
+
+    height:100vh;
+} */
+
+
+#login .box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    width:600px;
+
+    max-width:90%;
+}
+
+
+#name{
+
+    width:350px;
+
+    max-width:90%;
+
+    text-align:center;
+}
+
+
+
+#nameError{
+
+    height:30px;
+
+    margin-top:10px;
+
+    color:#ff4444;
+
+    font-weight:bold;
+} 
+
+
+
 #login h1,
 #login h2 {
 
@@ -384,6 +445,7 @@ Nhiệm vụ:
         0 0 15px rgba(255, 0, 0, .35);
 
 }
+
 
 
 /* ===================================================== */
@@ -3252,29 +3314,87 @@ Nhiệm vụ:
 }
 
 
-/* gameover */
-#jumpscareVideo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 999999;
-    display: none;
-}
-
-
 #over {
     position: relative;
-    z-index: 10;
+    overflow: hidden;
+
+    background: url("images/gameover-bg.jpg") center/cover no-repeat;
 }
 
-.screen {
+/* khối chính giữa */
+#gameover-box {
+
     position: absolute;
-    z-index: 1;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    text-align: center;
 }
 
-.screen.active {
-    z-index: 10;
+#over-title {
+
+    font-size: 70px;
+
+    color: #ff3b3b;
+
+    text-shadow:
+        0 0 10px red,
+        0 0 30px red;
+
+    margin: 0;
+}
+
+#over-countdown {
+    font-size: 28px;
+    color: #d0d0d0;
+}
+
+/* video jumpscare */
+#jumpscareVideo {
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 700px;
+    max-width: 90vw;
+
+    border-radius: 12px;
+
+    display: none;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 0 20px red,
+        0 0 50px red;
+}
+
+
+/* hiệug ứng chọn skill */
+.skill-card.selected {
+
+    border: 2px solid rgb(192, 11, 11);
+
+    box-shadow:
+        0 0 10px rgba(180, 12, 12, 0.603),
+        0 0 25px rgba(255, 119, 0, 0.579);
+
+    transform: scale(1.05);
+
+    transition: .3s;
 }

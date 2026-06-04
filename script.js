@@ -54,6 +54,8 @@ const wrongSound =
 
 const clickSound =
     document.getElementById("clickSound");
+const skillSound =
+    document.getElementById("skillSound");
 
 
 function playSound(id) {
@@ -72,25 +74,39 @@ function playSound(id) {
 
 window.onload = () => {
 
-    introMusic.volume = 0.45;
+    introMusic.volume = 0.65;
     loginMusic.volume = 0.45;
-    gameMusic.volume = 0.45;
+    gameMusic.volume = 0.75;
 
     rainSound.volume = 0.30;
+    rainSound.loop = true;
+
     typingSound.volume = 0.15;
-    thunderSound.volume = 0.70;
+    thunderSound.volume = 0.65;
 
-    monsterSound.volume = 0.10;
+    monsterSound.volume = 0.15;
 
-    correctSound.volume = 0.40;
-    wrongSound.volume = 0.40;
+    correctSound.volume = 0.60;
+    wrongSound.volume = 0.60;
 
-    clickSound.volume = 0.25;
+    clickSound.volume = 0.45;
+    skillSound.volume = 0.4;
 
-    introMusic.play().catch(() => {});
-    rainSound.play().catch(() => {});
-    show("intro"); // 👈 QUAN TRỌNG NHẤ
+    //KHÔNG PLAY NGAY (tránh bị browser chặn audio)
+    show("intro");
+
     startIntroStory();
+
+    // delay nhẹ để đảm bảo audio context được unlock
+    setTimeout(() => {
+
+        introMusic.currentTime = 0;
+        introMusic.play().catch(() => {});
+
+        rainSound.currentTime = 0;
+        rainSound.play().catch(() => {});
+
+    }, 300);
 };
 
 
@@ -272,7 +288,6 @@ function screenShake() {
 
 // intro ================/
 const introText = `The night before graduation.
-
 You received an email with no sender.
 
 The subject line was just one sentence:
@@ -290,75 +305,59 @@ All of those photos had faces obscured with black marks.
 A voice echoed from the loudspeaker:
 
 "Welcome to the Dead Student Union."
-
 "A place for students who have lost their dreams."
-
 "Want to leave here..."
-
 "Prove that you deserve a future."`;
 
 function startIntroStory() {
 
-    let textBox =
-        document.getElementById(
-            "intro-story"
-        );
+    const textBox = document.getElementById("intro-story");
+    const startBtn = document.getElementById("intro-btn");
+    const typingSound = document.getElementById("typingSound");
 
-    let startBtn =
-        document.getElementById(
-            "intro-btn"
-        );
-
-    let typingSound =
-        document.getElementById(
-            "typingSound"
-        );
     textBox.innerHTML = "";
     let i = 0;
 
-    let typing =
-        setInterval(() => {
+    let typing = setInterval(() => {
 
-            let char =
-                introText.charAt(i);
+        let char = introText.charAt(i);
+        textBox.innerHTML += char;
 
-            textBox.innerHTML += char;
+        // auto scroll
+        textBox.scrollTop = textBox.scrollHeight;
 
-            /* phát âm thanh mỗi 3 ký tự */
-            if (
-                i % 3 === 0 &&
-                char !== " " &&
-                char !== "\n"
-            ) {
+        // typing sound (FIX CHÍNH)
+        if (
+            i % 3 === 0 &&
+            char !== " " &&
+            char !== "\n"
+        ) {
+            try {
+                const clone = typingSound.cloneNode(true);
+                clone.volume = 0.15;
 
-                typingSound.currentTime = 0;
-
-                typingSound.play()
-                    .catch(() => {});
+                clone.play().catch(() => {});
+            } catch (e) {
+                console.log("Typing sound error:", e);
             }
+        }
 
-            textBox.scrollTop =
-                textBox.scrollHeight;
+        i++;
 
-            i++;
+        // END TEXT
+        if (i >= introText.length) {
 
-            if (i >= introText.length) {
+            clearInterval(typing);
 
-                clearInterval(typing);
+            // đảm bảo sound dừng sạch
+            typingSound.pause();
+            typingSound.currentTime = 0;
 
-                if (typingSound.paused) {
-                    typingSound.play().catch(() => {});
-                }
-                typingSound.pause();
-                typingSound.currentTime = 0;
-                startBtn.style.display =
-                    "inline-block";
-            }
+            startBtn.style.display = "inline-block";
+        }
 
-        }, 25);
+    }, 6);
 }
-
-
 
 
 /* MAP 1 */
@@ -455,18 +454,39 @@ function updateSlots() {
 ===================================================== */
 
 document.querySelectorAll(".skill-card").forEach(card => {
+
     card.onclick = () => {
 
         let skill = card.dataset.skill;
 
-        if (selectedSkills.includes(skill)) return;
-        if (selectedSkills.length >= 3) return;
+        // Nếu đã chọn => bỏ chọn
+        if (selectedSkills.includes(skill)) {
+
+            selectedSkills =
+                selectedSkills.filter(
+                    s => s !== skill
+                );
+
+            card.classList.remove("selected");
+
+            updateSlots();
+
+            return;
+        }
+
+        // Giới hạn 3 skill
+        if (selectedSkills.length >= 3)
+            return;
+
+        playSound("clickSound");
 
         selectedSkills.push(skill);
+
+        card.classList.add("selected");
+
         updateSlots();
     };
 });
-
 
 /* =====================================================
    LOGIN -> SKILL
@@ -485,28 +505,28 @@ let map1 = [{
         q: "She prefers face-to-face communication _______ texting on social media platforms.",
         o: ["than", "to", "rather", "more"],
         a: 1,
-        t: 20,
+        t: 25,
         explain: "Cấu trúc: prefer + N/V-ing + to + N/V-ing."
     },
     {
         q: "If you continue to consume so much sugar, you _______ the risk of developing diabetes.",
         o: ["run", "take", "hold", "make"],
         a: 0,
-        t: 20,
+        t: 25,
         explain: "Collocation: run the risk of doing something."
     },
     {
         q: "People should learn how to _______ their expenditures so that they can save for the future.",
         o: ["maximize", "track", "waste", "neglect"],
         a: 1,
-        t: 20,
+        t: 25,
         explain: "Track expenditures = theo dõi chi tiêu."
     },
     {
         q: "While I _______ for my IELTS test yesterday, my phone suddenly ran out of battery.",
         o: ["study", "studied", "am studying", "was studying"],
         a: 3,
-        t: 20,
+        t: 25,
         explain: "Quá khứ tiếp diễn + quá khứ đơn."
     },
     {
@@ -518,28 +538,28 @@ let map1 = [{
             "have the citizens realized"
         ],
         a: 0,
-        t: 20,
+        t: 25,
         explain: "Đảo ngữ với Not until."
     },
     {
         q: "So _______ is the trend of software customization that tech companies are investing heavily in iOS skin mods.",
         o: ["prevalent", "popularity", "prevalence", "popularly"],
         a: 0,
-        t: 20,
+        t: 25,
         explain: "So + adjective + be + subject + that."
     },
     {
         q: "It is imperative that he _______ his calorie intake if he wants to lose weight effectively.",
         o: ["reduces", "reduce", "reducing", "to reduce"],
         a: 1,
-        t: 20,
+        t: 25,
         explain: "Subjunctive mood: that + S + V nguyên mẫu."
     },
     {
         q: "The newly released iPhone 16 Pro Max, the interface of _______ can be extensively customized, has broken sales records.",
         o: ["that", "which", "whom", "whose"],
         a: 1,
-        t: 20,
+        t: 25,
         explain: "the + noun + of which."
     },
     {
@@ -551,14 +571,14 @@ let map1 = [{
             "had discovered"
         ],
         a: 2,
-        t: 20,
+        t: 25,
         explain: "Đảo ngữ câu điều kiện loại 3."
     },
     {
         q: "Continuous reliance on social media for communication may lead to _______ emotional connections among family members.",
         o: ["attenuated", "accumulated", "accentuated", "aggregated"],
         a: 0,
-        t: 20,
+        t: 25,
         explain: "Attenuated = bị suy giảm, yếu đi."
     }
 ];
@@ -1046,7 +1066,7 @@ function checkMap2Answer(answerText) {
                     ) {
 
                         box.style.background =
-                            "#16a34a";
+                            "#13c554";
 
                     }
 
@@ -1078,7 +1098,7 @@ function checkMap2Answer(answerText) {
                 ) {
 
                     box.style.background =
-                        "#dc2626";
+                        "#d61b1b";
 
                 }
 
@@ -1368,56 +1388,56 @@ let q = [
     {
         q: "The standard of living in this country has improved ____ over the last decade thanks to economic reforms.",
         a: "significantly",
-        t: 30,
+        t: 36,
         explain: "Significantly = một cách đáng kể. Trạng từ bổ nghĩa cho động từ improved."
     },
 
     {
         q: "She has a strong ____ to succeed in her career, which drives her to work late every night.",
         a: "ambition",
-        t: 30,
+        t: 36,
         explain: "Have a strong ambition to do something = có tham vọng lớn để làm gì."
     },
 
     {
         q: "Good communication skills are ____ if you want to work in the hospitality industry.",
         a: "essential",
-        t: 30,
+        t: 36,
         explain: "Essential = thiết yếu, cực kỳ quan trọng."
     },
 
     {
         q: "It is important to ____ a balance between your professional and personal life to avoid burnout.",
         a: "maintain",
-        t: 30,
+        t: 36,
         explain: "Maintain a balance = duy trì sự cân bằng."
     },
 
     {
         q: "Reorder: online/ the / communication/daily/face-to-face / interaction / is / of /social / replacing/media/growth/with/",
         a: "the growth of social media is replacing daily face-to-face interaction with online communication",
-        t: 60,
+        t: 76,
         explain: "Cấu trúc: The growth of social media + is replacing + A with B."
     },
 
     {
         q: "Reorder: financial/young/to/budget/dynamic/critical/management / skills/for/learn/it/adults/is/in/this/market/",
         a: "it is critical for young adults to learn financial budget management skills in this dynamic market",
-        t: 60,
+        t: 76,
         explain: "Cấu trúc: It is + adjective + for somebody + to V."
     },
 
     {
         q: "Rewrite: They started researching the hidden costs of low-quality consumer goods two hours ago. → They have ____",
         a: "been researching the hidden costs of low-quality consumer goods for two hours",
-        t: 60,
+        t: 76,
         explain: "Started ... ago → have been V-ing for + khoảng thời gian."
     },
 
     {
         q: "Investing in high-sugar beverages is not as profitable as investing in healthy tech startups. → Investing in healthy tech startups is ____",
         a: "more profitable than investing in high-sugar beverages",
-        t: 60,
+        t: 76,
         explain: "Cấu trúc chuyển đổi: not as ... as → more ... than."
     }
 
@@ -2238,46 +2258,35 @@ function typeWriterWin(text, textId, buttonId, answerBtnId = null) {
 
 function playJumpscare() {
 
-    const video = document.getElementById("jumpscareVideo");
-    if (!video) return;
+    const video =
+        document.getElementById(
+            "jumpscareVideo"
+        );
 
-    const overScreen = document.getElementById("over");
+    const title =
+        document.getElementById(
+            "over-title"
+        );
 
-    // ép chắc chắn hiện màn over
-    overScreen.style.display = "block";
-    overScreen.classList.add("active");
-
-    // ẩn UI
-    document.getElementById("over-title").style.display = "none";
-    document.getElementById("over-timer").style.display = "none";
-    document.getElementById("retry-btn").style.display = "none";
-
-    // show video
     video.style.display = "block";
-    video.muted = false;
+
+    title.style.opacity = "0.2";
+
     video.currentTime = 0;
 
-    video.load(); // 👈 QUAN TRỌNG FIX Chrome
-
-    setTimeout(() => {
-        video.play().catch(err => {
-            console.log("Video blocked:", err);
-        });
-    }, 100);
+    video.play().catch(() => {});
 
     video.onended = () => {
+
         video.style.display = "none";
 
-        document.getElementById("over-title").style.display = "block";
-        document.getElementById("over-timer").style.display = "block";
-        document.getElementById("retry-btn").style.display = "inline-block";
+        title.style.opacity = "1";
 
-        unlockAllInputs();
     };
 }
 
-
 function unlockAllInputs() {
+
     document.querySelectorAll("button").forEach(b => {
         b.disabled = false;
         b.style.pointerEvents = "auto";
@@ -2286,4 +2295,14 @@ function unlockAllInputs() {
     document.querySelectorAll(".answer").forEach(a => {
         a.style.pointerEvents = "auto";
     });
+
+    const over = document.getElementById("over");
+    if (over) {
+        over.style.pointerEvents = "auto";
+    }
+
+    const video = document.getElementById("jumpscareVideo");
+    if (video) {
+        video.style.pointerEvents = "none";
+    }
 }

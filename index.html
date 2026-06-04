@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Final Exam RPG</title>
+    <title>GAMEGROUP2</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -82,7 +82,7 @@
 
     <!-- âm thanh gõ phím -->
     <audio id="typingSound" preload="auto">
-        <source src="sounds/typing.mp3" type="audio/mpeg">
+        <source src="sounds/typin.mp3" type="audio/mpeg">
     </audio>
 
     <audio id="correctSound">
@@ -201,7 +201,7 @@
 
                 <div class="skill-card" data-skill="TIME" title="Increase +2 seconds for every question">
 
-                    <img src="images/time.png" class="skill-image">
+                    <!-- <img src="images/time.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         ⏳
@@ -209,6 +209,9 @@
 
                     <div class="skill-name">
                         TIME+
+                        <br>
+                        <br>
+                        Increase time for each question by 2s
                     </div>
 
                 </div>
@@ -217,7 +220,7 @@
 
                 <div class="skill-card" data-skill="LIFE" title="Gain +1 extra life">
 
-                    <img src="images/life.png" class="skill-image">
+                    <!-- <img src="images/life.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         ❤️
@@ -225,6 +228,9 @@
 
                     <div class="skill-name">
                         EXTRA LIFE
+                        <br>
+                        <br>
+                        +1 life for each stage played
                     </div>
 
                 </div>
@@ -233,7 +239,7 @@
 
                 <div class="skill-card" data-skill="5050" title="Remove 2 wrong answers">
 
-                    <img src="images/5050.png" class="skill-image">
+                    <!-- <img src="images/5050.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         🎯
@@ -241,6 +247,9 @@
 
                     <div class="skill-name">
                         50 / 50
+                        <br>
+                        <br>
+                        Remove 2 wrong answers
                     </div>
 
                 </div>
@@ -249,7 +258,7 @@
 
                 <div class="skill-card" data-skill="HELP" title="Show the correct answer">
 
-                    <img src="images/help.png" class="skill-image">
+                    <!-- <img src="images/help.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         🧠
@@ -257,6 +266,9 @@
 
                     <div class="skill-name">
                         HELP
+                        <br>
+                        <br>
+                        Suggest the correct answer
                     </div>
 
                 </div>
@@ -265,7 +277,7 @@
 
                 <div class="skill-card" data-skill="RETRY" title="Retry once before answer">
 
-                    <img src="images/retry.png" class="skill-image">
+                    <!-- <img src="images/retry.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         🔁
@@ -273,6 +285,9 @@
 
                     <div class="skill-name">
                         RETRY
+                        <br>
+                        <br>
+                        Allows you to choose again when you answer incorrectly
                     </div>
 
                 </div>
@@ -281,7 +296,7 @@
 
                 <div class="skill-card" data-skill="FIRST" title="First question always correct">
 
-                    <img src="images/first.png" class="skill-image">
+                    <!-- <img src="images/first.png" class="skill-image"> -->
 
                     <div class="skill-icon">
                         ⭐
@@ -289,6 +304,9 @@
 
                     <div class="skill-name">
                         FIRST WIN
+                        <br>
+                        <br>
+                        The first sentence is always correct
                     </div>
 
                 </div>
@@ -507,30 +525,31 @@
     </section>
 
 
-
     <!-- ===================================================== -->
     <!-- GAME OVER -->
     <!-- ===================================================== -->
 
-    <section id="over" class="screen">
 
-        <div class="box">
-            <video id="jumpscareVideo" src="jumpscare.mp4" style="position:fixed;top:0;left:0;width:100%;height:100%;
-       object-fit:cover;display:none;z-index:99999;" muted>
-            </video>
+    <div id="over" class="screen">
+
+        <!-- Video jumpscare -->
+        <video id="jumpscareVideo" preload="auto" playsinline>
             <source src="video/1.mp4" type="video/mp4">
-            </video>
-            <h1>
+        </video>
+
+        <!-- Khối Game Over -->
+        <div id="gameover-box">
+
+            <h1 id="over-title">
                 💀 GAME OVER
             </h1>
+
 
             <div id="over-timer">
 
                 Retry in 10s
 
             </div>
-
-            <br>
 
             <button id="retry-btn" onclick="restart()" class="btn-big" disabled>
 
@@ -548,7 +567,7 @@
 
         </div>
 
-    </section>
+    </div>
 
 
 
