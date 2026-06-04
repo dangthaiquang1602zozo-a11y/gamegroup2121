@@ -1301,14 +1301,14 @@ let map2Questions = [
 
     {
         question: "Before choosing a major, students should carefully ______ their options.",
-        answers: ["evaluate", "repeat", "ignore", "divide"],
+        answers: ["repeat", "ignore","evaluate", "divide"],
         correct: "evaluate",
         explain: "Evaluate options = đánh giá các lựa chọn."
     },
 
     {
         question: "Taking part in group projects can improve your ______ skills.",
-        answers: ["communication", "decoration", "transportation", "observation"],
+        answers: ["decoration", "transportation", "observation","communication"],
         correct: "communication",
         explain: "Communication skills = kỹ năng giao tiếp."
     },
@@ -1322,7 +1322,7 @@ let map2Questions = [
 
     {
         question: "Many students seek advice from teachers when making important ______ about their future.",
-        answers: ["decisions", "accidents", "inventions", "celebrations"],
+        answers: [ "accidents", "inventions", "celebrations","decisions"],
         correct: "decisions",
         explain: "Make decisions = đưa ra quyết định."
     },
@@ -1350,14 +1350,14 @@ let map2Questions = [
 
     {
         question: "They are looking forward to ______ from industry experts.",
-        answers: ["learn", "learning", "to learn", "learned"],
+        answers: ["learn", "to learn","learning", "learned"],
         correct: "learning",
         explain: "Look forward to + V-ing."
     },
 
     {
         question: "She was determined ______ her education despite many difficulties.",
-        answers: ["continue", "continuing", "to continue", "continued"],
+        answers: ["continue", "continuing", "continued","to continue"],
         correct: "to continue",
         explain: "Determined to + V."
     }
@@ -1675,8 +1675,7 @@ The forgotten students finally smile.
 You have proven that your future still belongs to you.
 You escaped the Dead Students Society.`,
             "win-story",
-            "win-btn",
-            "allanswer-btn"
+            "win-btn"
         );
 
         return;
@@ -2226,8 +2225,13 @@ function typeWriterWin(text, textId, buttonId, answerBtnId = null) {
     let answerBtn = null;
 
     if (answerBtnId) {
-        answerBtn = document.getElementById(answerBtnId);
-        answerBtn.style.display = "none";
+
+        answerBtn =
+            document.getElementById(answerBtnId);
+
+        if (answerBtn) {
+            answerBtn.style.display = "none";
+        }
     }
 
     box.innerHTML = "";
