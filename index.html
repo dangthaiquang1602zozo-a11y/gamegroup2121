@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ===================================================== -->
+    <!-- THIẾT LẬP CƠ BẢN -->
+    <!-- ===================================================== -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Final Exam RPG</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- ===================================================== -->
+    <!-- PARTICLE BACKGROUND -->
+    <!-- ===================================================== -->
+
+    <div class="particles">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- SKILL BAR DÙNG CHUNG CHO MAP 1 + MAP 3 -->
+    <!-- ===================================================== -->
+
+    <div id="skill-bar" class="skill-bar">
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ÂM THANH -->
+    <!-- ===================================================== -->
+
+    <!-- MUSIC -->
+
+    <!-- âm thanh chuyển cảnh -->
+    <audio id="doorSound">
+        <source src="sounds/door.mp3">
+    </audio>
+
+
+    <!-- âm thanh useskill -->
+    <audio id="skillSound"></audio>
+
+    <!-- âm thanh gõ phím -->
+    <audio id="introMusic" loop>
+        <source src="sounds/intro_music.mp3">
+    </audio>
+
+    <!-- nhạc mở màn  -->
+    <audio id="loginMusic" loop>
+        <source src="sounds/login_music.mp3">
+    </audio>
+
+    <!--  nhạc nền cả game  -->
+    <audio id="gameMusic" loop>
+        <source src="sounds/game_music.mp3">
+    </audio>
+
+    <!-- AMBIENT -->
+
+    <audio id="rainSound" loop>
+        <source src="sounds/rain.mp3">
+    </audio>
+
+    <audio id="thunderSound">
+        <source src="sounds/thunder.mp3">
+    </audio>
+
+    <!-- âm thanh gõ phím -->
+    <audio id="typingSound" preload="auto">
+        <source src="sounds/typing.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="correctSound">
+        <source src="sounds/correct.mp3">
+    </audio>
+
+    <audio id="wrongSound">
+        <source src="sounds/wrong.mp3">
+    </audio>
+
+    <audio id="winSound">
+        <source src="sounds/win.mp3">
+    </audio>
+
+    <audio id="loseSound">
+        <source src="sounds/lose.mp3">
+    </audio>
+
+    <!-- âm thanh khi mất tim -->
+    <audio id="monsterSound">
+        <source src="sounds/monster.mp3">
+    </audio>
+
+    <audio id="clickSound">
+        <source src="sounds/click.mp3">
+    </audio>
+
+    <audio id="skillSound">
+        <source src="sounds/skill.mp3">
+    </audio>
+
+    <audio id="clapSound">
+        <source src="sounds/clap.mp3">
+    </audio>
+
+
+
+    <!-- effect -->
+    <div id="rain"></div>
+    <div id="lightning"></div>
+    <div id="ghost-particles"></div>
+    <div id="fog"></div>
+    <div id="hall-light"></div>
+
+
+    <!-- ===================================================== -->
+    <!-- INTRO SCREEN -->
+    <!-- ===================================================== -->
+
+    <section id="intro" class="screen active">
+
+        <div class="box">
+
+            <!-- Ảnh intro -->
+            <!-- <img src="images/intro.png" class="intro-image"> -->
+
+            <h1 style="color: #f900009a;"> Dead Students Society </h1>
+
+            <p id="intro-story">
+            </p>
+
+            <button id="intro-btn" onclick="show('login')" class="btn-big" style="display:none;">
+
+                START
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- LOGIN -->
+    <!-- ===================================================== -->
+
+    <section id="login" class="screen">
+
+        <div class="box">
+
+            <h1>ENTER YOUR NAME</h1>
+
+            <input id="name" class="input-big" autocomplete="off" placeholder="Your Name">
+
+            <br><br>
+
+            <button onclick="startSkill()" class="btn-big">
+
+                CONTINUE
+
+            </button>
+
+            <!-- hiển thị tên nếu muốn -->
+            <div id="playerName"></div>
+
+        </div>
+
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- CHỌN SKILL -->
+    <!-- ===================================================== -->
+
+    <section id="skill" class="screen">
+
+        <div class="box skill-box">
+
+            <h1>SELECT 3 SKILLS</h1>
+
+            <!-- ===================================================== -->
+            <!-- DANH SÁCH SKILL -->
+            <!-- ===================================================== -->
+
+            <div class="skill-grid">
+
+                <!-- TIME -->
+
+                <div class="skill-card" data-skill="TIME" title="Increase +2 seconds for every question">
+
+                    <img src="images/time.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        ⏳
+                    </div>
+
+                    <div class="skill-name">
+                        TIME+
+                    </div>
+
+                </div>
+
+                <!-- LIFE -->
+
+                <div class="skill-card" data-skill="LIFE" title="Gain +1 extra life">
+
+                    <img src="images/life.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        ❤️
+                    </div>
+
+                    <div class="skill-name">
+                        EXTRA LIFE
+                    </div>
+
+                </div>
+
+                <!-- 50/50 -->
+
+                <div class="skill-card" data-skill="5050" title="Remove 2 wrong answers">
+
+                    <img src="images/5050.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        🎯
+                    </div>
+
+                    <div class="skill-name">
+                        50 / 50
+                    </div>
+
+                </div>
+
+                <!-- HELP -->
+
+                <div class="skill-card" data-skill="HELP" title="Show the correct answer">
+
+                    <img src="images/help.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        🧠
+                    </div>
+
+                    <div class="skill-name">
+                        HELP
+                    </div>
+
+                </div>
+
+                <!-- RETRY -->
+
+                <div class="skill-card" data-skill="RETRY" title="Retry once before answer">
+
+                    <img src="images/retry.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        🔁
+                    </div>
+
+                    <div class="skill-name">
+                        RETRY
+                    </div>
+
+                </div>
+
+                <!-- FIRST -->
+
+                <div class="skill-card" data-skill="FIRST" title="First question always correct">
+
+                    <img src="images/first.png" class="skill-image">
+
+                    <div class="skill-icon">
+                        ⭐
+                    </div>
+
+                    <div class="skill-name">
+                        FIRST WIN
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- Ô HIỂN THỊ SKILL ĐÃ CHỌN -->
+            <!-- ===================================================== -->
+
+            <div class="selected-skill-box">
+
+                <div class="slot" id="slot1">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" id="slot2">
+                    <span>+</span>
+                </div>
+
+                <div class="slot" id="slot3">
+                    <span>+</span>
+                </div>
+
+            </div>
+
+            <!-- ===================================================== -->
+            <!-- START GAME -->
+            <!-- ===================================================== -->
+
+            <br>
+
+            <button id="start-game-btn" class="btn-big">
+
+                OK - START GAME
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- ===================================================== -->
+    <!-- MAP 1 -->
+    <!-- ===================================================== -->
+
+    <section id="map1" class="screen">
+
+        <div class="box game-box">
+
+            <!-- TOP UI -->
+
+            <div class="top-ui">
+
+                <div id="map1-progress">
+                    Q1/10
+                </div>
+
+                <div id="map1-timer">
+                    20
+                </div>
+
+                <div id="map1-lives">
+                    ❤️❤️❤️
+                </div>
+
+            </div>
+
+            <!-- QUESTION -->
+
+            <h2 id="map1-question"></h2>
+
+            <!-- ANSWERS -->
+
+            <div id="map1-options"></div>
+
+            <!-- FEEDBACK -->
+
+            <div id="map1-feedback"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- MAP 1 WIN -->
+    <!-- ===================================================== -->
+
+    <section id="map1win" class="screen">
+
+        <div class="box">
+
+            <!--  <img src="images/map1win.png" class="end-image"> -->
+
+            <h1>
+                🎉 MAP 1 COMPLETED
+            </h1>
+
+            <div id="map1win-story" class="win-story"></div>
+
+            <button id="map1win-btn" class="btn-big" onclick="startMap2()" style="display:none;">
+                CONTINUE
+            </button>>
+
+
+            <br><br>
+            <button id="map1answer-btn" onclick="showMap1Solution()" class="btn-big">
+                ALL ANSWERS
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAP 2 -->
+    <section id="map2" class="screen">
+
+        <div id="topBar">
+
+            <div id="map2-lives">❤️❤️❤️</div>
+            <div id="map2-timer">04:00</div>
+        </div>
+
+        <div id="map2-question"></div>
+
+        <div id="map2-feedback"></div>
+
+    </section>
+
+    <section id="map2win" class="screen">
+
+        <div class="box">
+
+            <!-- <img src="images/map2win.png" class="end-image"> -->
+
+            <h1>
+                🎉 MAP 2 COMPLETED
+            </h1>
+
+
+            <div id="map2win-story" class="win-story"></div>
+
+            <button id="map2win-btn" class="btn-big" onclick="toMap3()" style="display:none;">
+                CONTINUE
+            </button>
+
+            <br><br>
+
+            <button id="map2answer-btn" class="btn-big" onclick="showMap2Solution()" style="display:none;">
+                SEE ALL ANSWERS
+            </button>
+        </div>
+
+    </section>
+
+
+
+
+    <!-- ===================================================== -->
+    <!-- MAP 3 -->
+    <!-- ===================================================== -->
+
+    <section id="game" class="screen">
+
+        <div class="box game-box">
+
+            <!-- TOP UI -->
+
+            <div class="top-ui">
+
+                <div id="progress">
+                    Q1/8
+                </div>
+
+                <div id="timer">
+                    25
+                </div>
+
+                <div id="lives">
+                    ❤️❤️❤️
+                </div>
+
+            </div>
+
+            <!-- QUESTION -->
+
+            <h2 id="question"></h2>
+
+            <!-- ANSWER INPUT -->
+
+            <input id="answer" class="input-big" placeholder="Enter your answer..." autocomplete="off">
+
+            <br><br>
+
+            <!-- SUBMIT -->
+
+            <button onclick="check()" class="btn-big">
+
+                SUBMIT
+
+            </button>
+
+            <!-- FEEDBACK -->
+
+            <div id="feedback"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- GAME OVER -->
+    <!-- ===================================================== -->
+
+    <section id="over" class="screen">
+
+        <div class="box">
+            <video id="jumpscareVideo" src="jumpscare.mp4" style="position:fixed;top:0;left:0;width:100%;height:100%;
+       object-fit:cover;display:none;z-index:99999;" muted>
+            </video>
+            <source src="video/1.mp4" type="video/mp4">
+            </video>
+            <h1>
+                💀 GAME OVER
+            </h1>
+
+            <div id="over-timer">
+
+                Retry in 10s
+
+            </div>
+
+            <br>
+
+            <button id="retry-btn" onclick="restart()" class="btn-big" disabled>
+
+                RETRY
+
+            </button>
+
+            <br><br>
+
+            <button onclick="showWrongSolution()" class="btn-big">
+
+                SEE WRONG ANSWERS
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- WIN -->
+    <!-- ===================================================== -->
+
+    <section id="win" class="screen">
+
+        <div class="box">
+
+            <!-- <img src="images/win.png" class="end-image"> -->
+
+            <h1>
+                🏆 YOU WIN
+            </h1>
+
+            <div id="win-story" class="win-story"></div>
+
+            <button id="win-btn" class="btn-big" onclick="showMap3Solution()" style="display:none;">
+                VIEW ANSWERS
+            </button>
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+    POPUP LỜI GIẢI (WIN + LOSE CHUNG)
+===================================================== -->
+
+    <section id="solution-popup" class="popup" style="display:none;">
+
+        <div class="popup-box solution-animate">
+
+            <div class="popup-header">
+
+                <h2 id="solution-title">LỜI GIẢI</h2>
+
+                <button onclick="closeSolution()">✖</button>
+
+            </div>
+
+            <div id="solution-content">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- THÔNG BÁO GAME -->
+    <div id="game-message"></div>
+
+    <!-- ===================================================== -->
+    <!-- FIREWORKS CANVAS -->
+    <!-- ===================================================== -->
+
+    <canvas id="fireworks"></canvas>
+
+
+    <!-- =====================================================
+    COMBO EFFECT
+    ===================================================== -->
+
+    <div id="combo-effect"></div>
+
+
+    <!-- ===================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ===================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
