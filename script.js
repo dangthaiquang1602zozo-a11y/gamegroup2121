@@ -76,20 +76,20 @@ window.onload = () => {
 
     introMusic.volume = 0.65;
     loginMusic.volume = 0.45;
-    gameMusic.volume = 0.75;
+    gameMusic.volume = 0.76;
 
     rainSound.volume = 0.30;
     rainSound.loop = true;
 
     typingSound.volume = 0.15;
-    thunderSound.volume = 0.65;
+    thunderSound.volume = 0.60;
 
-    monsterSound.volume = 0.15;
+    monsterSound.volume = 0.19;
 
     correctSound.volume = 0.60;
     wrongSound.volume = 0.60;
 
-    clickSound.volume = 0.45;
+    clickSound.volume = 0.49;
     skillSound.volume = 0.4;
 
     //KHÔNG PLAY NGAY (tránh bị browser chặn audio)
@@ -500,87 +500,88 @@ function startSkill() {
 /* =====================================================
    MAP 1 DATA (GIỮ NGUYÊN)
 ===================================================== */
+let map1 = [
 
-let map1 = [{
-        q: "She prefers face-to-face communication _______ texting on social media platforms.",
-        o: ["than", "to", "rather", "more"],
-        a: 1,
-        t: 25,
-        explain: "Cấu trúc: prefer + N/V-ing + to + N/V-ing."
-    },
     {
-        q: "If you continue to consume so much sugar, you _______ the risk of developing diabetes.",
-        o: ["run", "take", "hold", "make"],
+        q: "Many students dream of becoming successful, but only a few have the ______ to work hard every day.",
+        o: ["determination", "vacation", "talent", "hobby"],
         a: 0,
         t: 25,
-        explain: "Collocation: run the risk of doing something."
+        explain: "Determination = sự quyết tâm. Chủ đề vượt khó để đạt mục tiêu."
     },
+
     {
-        q: "People should learn how to _______ their expenditures so that they can save for the future.",
-        o: ["maximize", "track", "waste", "neglect"],
+        q: "She hopes ______ a scholarship to study abroad next year.",
+        o: ["getting", "to get", "got", "get"],
         a: 1,
         t: 25,
-        explain: "Track expenditures = theo dõi chi tiêu."
+        explain: "Hope + to V."
     },
+
     {
-        q: "While I _______ for my IELTS test yesterday, my phone suddenly ran out of battery.",
-        o: ["study", "studied", "am studying", "was studying"],
-        a: 3,
-        t: 25,
-        explain: "Quá khứ tiếp diễn + quá khứ đơn."
-    },
-    {
-        q: "Not until the financial crisis hit the country _______ the critical importance of personal finance development.",
-        o: [
-            "did the citizens realize",
-            "the citizens realized",
-            "had the citizens realized",
-            "have the citizens realized"
-        ],
+        q: "Many students worry about their future ______ after graduation.",
+        o: ["careers", "holidays", "birthdays", "hobbies"],
         a: 0,
         t: 25,
-        explain: "Đảo ngữ với Not until."
+        explain: "Future career = nghề nghiệp tương lai."
     },
+
     {
-        q: "So _______ is the trend of software customization that tech companies are investing heavily in iOS skin mods.",
-        o: ["prevalent", "popularity", "prevalence", "popularly"],
-        a: 0,
-        t: 25,
-        explain: "So + adjective + be + subject + that."
-    },
-    {
-        q: "It is imperative that he _______ his calorie intake if he wants to lose weight effectively.",
-        o: ["reduces", "reduce", "reducing", "to reduce"],
+        q: "I enjoy ______ part in volunteer activities because they help me learn new skills.",
+        o: ["take", "taking", "to take", "took"],
         a: 1,
         t: 25,
-        explain: "Subjunctive mood: that + S + V nguyên mẫu."
+        explain: "Enjoy + V-ing. Take part in = tham gia."
     },
+
     {
-        q: "The newly released iPhone 16 Pro Max, the interface of _______ can be extensively customized, has broken sales records.",
-        o: ["that", "which", "whom", "whose"],
-        a: 1,
-        t: 25,
-        explain: "the + noun + of which."
-    },
-    {
-        q: "Had they conducted a more thorough market research, they _______ the hidden costs before launching the product.",
-        o: [
-            "would discover",
-            "discovered",
-            "would have discovered",
-            "had discovered"
-        ],
+        q: "Good grades are important, but work ______ is also valuable.",
+        o: ["pressure", "success", "experience", "ambition"],
         a: 2,
         t: 25,
-        explain: "Đảo ngữ câu điều kiện loại 3."
+        explain: "Work experience = kinh nghiệm làm việc."
     },
+
     {
-        q: "Continuous reliance on social media for communication may lead to _______ emotional connections among family members.",
-        o: ["attenuated", "accumulated", "accentuated", "aggregated"],
+        q: "She has ______ English since she was a child.",
+        o: ["study", "studied", "studying", "studies"],
+        a: 1,
+        t: 25,
+        explain: "Present Perfect: has + V3."
+    },
+
+    {
+        q: "Many students feel a lot of ______ because their families expect them to get high grades.",
+        o: ["pressure", "freedom", "happiness", "excitement"],
         a: 0,
         t: 25,
-        explain: "Attenuated = bị suy giảm, yếu đi."
+        explain: "Pressure = áp lực. Chủ đề áp lực học tập."
+    },
+
+    {
+        q: "Although he failed the exam once, he continued to ______ his dream of becoming a doctor.",
+        o: ["pursue", "avoid", "cancel", "forget"],
+        a: 0,
+        t: 25,
+        explain: "Pursue a dream = theo đuổi ước mơ."
+    },
+
+    {
+        q: "Some students find it difficult to choose a career because they are not sure about their ______.",
+        o: ["classrooms", "uniforms", "strengths", "schedules"],
+        a: 2,
+        t: 25,
+        explain: "Strengths = điểm mạnh. Biết điểm mạnh giúp chọn nghề phù hợp."
+    },
+
+    {
+        q: "Many students choose to take extra courses because they want to improve their ______ for future careers.",
+        o: ["friendships", "memories", "interests", "qualifications"],
+        a: 3,
+        t: 25,
+        explain: "Improve qualifications = nâng cao trình độ, bằng cấp."
     }
+
 ];
 /* =====================================================
    START MAP 1
@@ -1288,93 +1289,80 @@ One final challenge remains.`,
 
 // câu hỏi map 2
 
+
 let map2Questions = [
 
     {
-        question: " If you don't manage your personal finance properly, you will easily fall into ______.",
-        answers: ["wealth", "debt", "budget", "investment"],
-        correct: "debt",
-        explain: "Fall into debt = lâm vào cảnh nợ nần."
+        question: "The career workshop helped students become more ______ about their future plans.",
+        answers: ["careless", "ordinary", "nervous", "confident"],
+        correct: "confident",
+        explain: "Confident about something = tự tin về điều gì."
     },
 
     {
-        question: " The company decided to reduce the ______ costs by purchasing cheaper raw materials.",
-        answers: ["hidden", "visible", "production", "consumer"],
-        correct: "production",
-        explain: "Production costs = chi phí sản xuất."
+        question: "Before choosing a major, students should carefully ______ their options.",
+        answers: ["evaluate", "repeat", "ignore", "divide"],
+        correct: "evaluate",
+        explain: "Evaluate options = đánh giá các lựa chọn."
     },
 
     {
-        question: " She ______ English since she moved to Ho Chi Minh City four years ago.",
-        answers: ["studied", "is studying", "has been studying", "studies"],
-        correct: "has been studying",
-        explain: "Since + mốc thời gian → Present Perfect Continuous."
+        question: "Taking part in group projects can improve your ______ skills.",
+        answers: ["communication", "decoration", "transportation", "observation"],
+        correct: "communication",
+        explain: "Communication skills = kỹ năng giao tiếp."
     },
 
     {
-        question: " The high consumption of milk tea, ______ is packed with sugar, poses major health risks.",
-        answers: ["who", "which", "that", "where"],
-        correct: "which",
-        explain: "Mệnh đề quan hệ không xác định dùng which."
+        question: "It is important to ______ new skills to stay competitive in today's job market.",
+        answers: ["develop", "destroy", "remove", "reduce"],
+        correct: "develop",
+        explain: "Develop skills = phát triển kỹ năng."
     },
 
     {
-        question: " Many teenagers are modernizing their smartphones by installing customized ______.",
-        answers: ["skins", "screens", "hardware", "batteries"],
-        correct: "skins",
-        explain: "Customized skins = giao diện tùy biến."
+        question: "Many students seek advice from teachers when making important ______ about their future.",
+        answers: ["decisions", "accidents", "inventions", "celebrations"],
+        correct: "decisions",
+        explain: "Make decisions = đưa ra quyết định."
     },
 
     {
-        question: "To achieve an IELTS band 7.0, candidates must show an advanced command of academic ______.",
-        answers: ["grammar", "vocabulary", "speaking", "sentences"],
-        correct: "vocabulary",
-        explain: "Academic vocabulary = từ vựng học thuật."
+        question: "Students are interested in ______ part in volunteer activities.",
+        answers: ["take", "taking", "to take", "took"],
+        correct: "taking",
+        explain: "Interested in + V-ing."
     },
 
     {
-        question: " Buying a cheap phone might seem economical, but the ______ repairs can be very expensive.",
-        answers: ["initial", "subsequent", "prior", "immediate"],
-        correct: "subsequent",
-        explain: "Subsequent = xảy ra sau đó."
-    },
-
-    {
-        question: " My brother is incredibly interested in software customization, ______?",
-        answers: ["is he", "isn't he", "does he", "doesn't he"],
-        correct: "isn't he",
-        explain: "Tag question của 'is' là 'isn't he'."
-    },
-
-    {
-        question: " Fast food and sugar-based drinks are known to have a negative ______ on teenagers' health.",
-        answers: ["affect", "effective", "impact", "impactive"],
-        correct: "impact",
-        explain: "Have a negative impact on."
-    },
-
-    {
-        question: " He promised ______ his monthly budget more strictly from next month.",
-        answers: ["follow", "following", "to follow", "followed"],
-        correct: "to follow",
+        question: "She promised ______ harder to achieve her goals.",
+        answers: ["work", "working", "to work", "worked"],
+        correct: "to work",
         explain: "Promise + to V."
     },
-    {
-        question: "The iPhone 16 Pro Max is considered one of the most ______ smartphones on the market today.",
-        answers: [
 
-            "basic",
-            "advanced",
-            "obsolete",
-            "primitive"
-        ],
-        correct: "advanced",
-        explain: "Advanced = tiên tiến, hiện đại. Phù hợp với một dòng flagship mới như iPhone 16 Pro Max."
+    {
+        question: "He succeeded in ______ a balance between study and personal life.",
+        answers: ["find", "finding", "to find", "found"],
+        correct: "finding",
+        explain: "Succeed in + V-ing."
+    },
+
+    {
+        question: "They are looking forward to ______ from industry experts.",
+        answers: ["learn", "learning", "to learn", "learned"],
+        correct: "learning",
+        explain: "Look forward to + V-ing."
+    },
+
+    {
+        question: "She was determined ______ her education despite many difficulties.",
+        answers: ["continue", "continuing", "to continue", "continued"],
+        correct: "to continue",
+        explain: "Determined to + V."
     }
 
 ];
-
-
 
 
 
@@ -1385,12 +1373,6 @@ let map2Questions = [
 
 let q = [
 
-    {
-        q: "The standard of living in this country has improved ____ over the last decade thanks to economic reforms.",
-        a: "significantly",
-        t: 36,
-        explain: "Significantly = một cách đáng kể. Trạng từ bổ nghĩa cho động từ improved."
-    },
 
     {
         q: "She has a strong ____ to succeed in her career, which drives her to work late every night.",
@@ -1399,12 +1381,6 @@ let q = [
         explain: "Have a strong ambition to do something = có tham vọng lớn để làm gì."
     },
 
-    {
-        q: "Good communication skills are ____ if you want to work in the hospitality industry.",
-        a: "essential",
-        t: 36,
-        explain: "Essential = thiết yếu, cực kỳ quan trọng."
-    },
 
     {
         q: "It is important to ____ a balance between your professional and personal life to avoid burnout.",
@@ -1414,34 +1390,63 @@ let q = [
     },
 
     {
-        q: "Reorder: online/ the / communication/daily/face-to-face / interaction / is / of /social / replacing/media/growth/with/",
-        a: "the growth of social media is replacing daily face-to-face interaction with online communication",
-        t: 76,
-        explain: "Cấu trúc: The growth of social media + is replacing + A with B."
+        q: "Some students give up on their goals too easily because they do not have enough ____ to overcome challenges.",
+        a: "determination",
+        t: 36,
+        explain: "Determination = sự quyết tâm. Đây là phẩm chất quan trọng để đạt được mục tiêu."
     },
 
     {
-        q: "Reorder: financial/young/to/budget/dynamic/critical/management / skills/for/learn/it/adults/is/in/this/market/",
-        a: "it is critical for young adults to learn financial budget management skills in this dynamic market",
-        t: 76,
-        explain: "Cấu trúc: It is + adjective + for somebody + to V."
+        q: "After attending several career workshops, she finally realized which career she wanted to ____.",
+        a: "pursue",
+        t: 36,
+        explain: "Pursue a career = theo đuổi sự nghiệp."
     },
 
     {
-        q: "Rewrite: They started researching the hidden costs of low-quality consumer goods two hours ago. → They have ____",
-        a: "been researching the hidden costs of low-quality consumer goods for two hours",
-        t: 76,
-        explain: "Started ... ago → have been V-ing for + khoảng thời gian."
+        q: "Participating in volunteer projects can provide valuable ____ that employers often look for.",
+        a: "experience",
+        t: 36,
+        explain: "Valuable experience = kinh nghiệm quý giá."
     },
 
     {
-        q: "Investing in high-sugar beverages is not as profitable as investing in healthy tech startups. → Investing in healthy tech startups is ____",
-        a: "more profitable than investing in high-sugar beverages",
-        t: 76,
-        explain: "Cấu trúc chuyển đổi: not as ... as → more ... than."
+        q: "Although his dream seemed difficult at first, he believed it was still ____ if he worked hard enough.",
+        a: "achievable",
+        t: 36,
+        explain: "Achievable = có thể đạt được."
+    },
+
+    {
+        q: "Reorder: always / dreamed / I / have / of / studying / abroad",
+        a: "i have always dreamed of studying abroad",
+        t: 86,
+        explain: "Structure: S + have/has + always + V3. Dream of + V-ing."
+    },
+
+    {
+        q: "Reorder: important / it / is / to / gain / work / experience",
+        a: "it is important to gain work experience",
+        t: 86,
+        explain: "Structure: It is + adjective + to V."
+    },
+
+    {
+        q: "Rewrite: She started learning English three years ago. → She has ____",
+        a: "learned english for three years",
+        t: 86,
+        explain: "Started ... ago → have/has + V3 + for + khoảng thời gian."
+    },
+
+    {
+        q: "Rewrite: My long-term ambition is to pursue a career in international business. → I aspire ____",
+        a: "to pursue a career in international business",
+        t: 86,
+        explain: "Aspire to + V = khao khát, mong muốn đạt được điều gì."
     }
 
 ];
+
 
 /* =====================================================
    LOAD MAP 3
