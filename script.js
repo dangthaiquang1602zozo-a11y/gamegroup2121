@@ -1,6 +1,3 @@
-/* =====================================================
-   BIẾN TOÀN CỤC
-===================================================== */
 
 let selectedSkills = [];
 let usedSkill = {};
@@ -92,12 +89,10 @@ window.onload = () => {
     clickSound.volume = 0.49;
     skillSound.volume = 0.4;
 
-    //KHÔNG PLAY NGAY (tránh bị browser chặn audio)
     show("intro");
 
     startIntroStory();
 
-    // delay nhẹ để đảm bảo audio context được unlock
     setTimeout(() => {
 
         introMusic.currentTime = 0;
@@ -216,21 +211,18 @@ document.getElementById("start-game-btn").onclick = () => {
 
 function show(id) {
 
-    // 1. Ẩn tất cả screen
     document
         .querySelectorAll(".screen")
         .forEach(s => s.classList.remove("active"));
 
-    // 2. Hiện screen được chọn
+
     document
         .getElementById(id)
         .classList.add("active");
 
-    // 3. Update hiệu ứng môi trường
     updateRainEffect();
     updateIntroEffects();
 
-    // 4. QUẢN LÝ ÂM THANH TẬP TRUNG
     updateAudioByScreen(id);
 }
 
@@ -272,7 +264,6 @@ function updateAudioByScreen(id) {
 
 
 
-// camera chuyển cảnh ======================?
 function screenShake() {
 
     document.body.classList.add("screen-shake");
@@ -375,7 +366,7 @@ function getStartLives() {
 }
 
 /* =====================================================
-   SKILL BAR (FIX: CHỈ 1 BAR DUY NHẤT)
+   SKILL BAR 
 ===================================================== */
 
 function buildSkillBar() {
@@ -498,7 +489,7 @@ function startSkill() {
 
 
 /* =====================================================
-   MAP 1 DATA (GIỮ NGUYÊN)
+   MAP 1 DATA - câu hỏi các thứ 
 ===================================================== */
 let map1 = [
 
